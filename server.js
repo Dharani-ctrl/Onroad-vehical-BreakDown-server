@@ -12,8 +12,22 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "OnRoad Breakdown API Running"
+  });
+});
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://onroad-vehical-break-down-client.vercel.app"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
